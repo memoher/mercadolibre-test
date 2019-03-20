@@ -6,5 +6,13 @@ Ejecutar API en modo dev:
 ```bash
 cd server
 npm i
-npm run debug
+npm start
+```
+
+## APP
+Ejecutar APP en modo dev:
+```bash
+cd ng-client
+npm i
+npm start
 ```
