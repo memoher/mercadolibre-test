@@ -22,6 +22,7 @@ $marginPaddingSize1: 16px;
 $marginPaddingSize2: 32px;
 // Others
 $thumbnailSize: 180px;
+$pictureSize: 680px;
 
 header {
     background-color: $headerBackgroundColor;
@@ -65,46 +66,66 @@ app-search-bar {
     margin: 0 0 $marginPaddingSize2 0;
 }
 
-.ml-item-card {
-    padding: $marginPaddingSize1;
-    border-bottom: 1px solid $bodyBackgroundColor;
-    .ml-item-thumbnail {
-        height: $thumbnailSize;
-        min-height: $thumbnailSize;
-        max-height: $thumbnailSize;
-        width: $thumbnailSize;
-        min-width: $thumbnailSize;
-        max-width: $thumbnailSize;
-        border-radius: 4px;
-        margin: 0 $marginPaddingSize1 0 0;
-    }
-    @media (min-width: 350px) {
+app-item-list {
+    .ml-item-card {
+        padding: $marginPaddingSize1;
+        border-bottom: 1px solid $bodyBackgroundColor;
         .ml-item-thumbnail {
-            float:  left !important;
+            width: $thumbnailSize;
+            min-width: $thumbnailSize;
+            max-width: $thumbnailSize;
+            height: $thumbnailSize;
+            min-height: $thumbnailSize;
+            max-height: $thumbnailSize;
+            border-radius: 4px;
+            margin: 0 $marginPaddingSize1 0 0;
+        }
+        @media (min-width: 400px) {
+            .ml-item-thumbnail {
+                float:  left !important;
+            }
+        }
+        .ml-item-price {
+            line-height: $fontSize5;
+            font-size: $fontSize5;
+            font-weight: bold;
+            white-space: nowrap;
+            min-width: 200px;
+            .ml-item-shipping {
+                background: url('/assets/images/ic_shipping.png') no-repeat;
+                width: 18px;
+                height: 18px;
+                display: inline-block;
+            }
+        }
+        .ml-item-location {
+            line-height: $fontSize5;
+            color: $secondaryColor;
+            font-size: $fontSize1;
+            white-space: nowrap;
+            min-width: 100px;
+        }
+        .ml-item-description {
+            font-size: $fontSize4;
+            padding: $marginPaddingSize2 0 0 0;
         }
     }
-    .ml-item-price {
-        line-height: $fontSize5;
-        font-size: $fontSize5;
-        font-weight: bold;
-        white-space: nowrap;
-        min-width: 150px;
-        .ml-item-shipping {
-            background: url('/assets/images/ic_shipping.png') no-repeat;
-            width: 18px;
-            height: 18px;
-            display: inline-block;
+}
+
+app-item-details {
+    .ml-item-card {
+        padding: $marginPaddingSize2;
+        .ml-item-picture {
+            width: $pictureSize;
+            min-width: $pictureSize;
+            max-width: $pictureSize;
+            height: $pictureSize;
+            min-height: $pictureSize;
+            max-height: $pictureSize;
         }
-    }
-    .ml-item-location {
-        line-height: $fontSize5;
-        color: $secondaryColor;
-        font-size: $fontSize1;
-        white-space: nowrap;
-        min-width: 150px;
-    }
-    .ml-item-description {
-        font-size: $fontSize4;
-        padding: $marginPaddingSize2 0 0 0;
+        .ml-item-description {
+            font-size: $fontSize4;
+            padding: $marginPaddingSize2 0 0 0;
+        }
     }
 }
