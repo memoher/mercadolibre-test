@@ -29,21 +29,34 @@ app.get("/items", catchUnhandledErrors((req, res) => {
             let categories = [];
             let items = [];
             if (data) {
+                categories = (data.filters || [])
+                    .filter(category => category.id === "category")
+                    .map(category => category.values
+                        .map(value =>  value.path_from_root
+                            .map(path => path.name)
+                        )
+                        .find(() => true)
+                    )
+                    .find(() => true);
+
                 let results = data.results || [];
                 for (let i = 0; i < 4 && i < results.length; i++) {
-                    let r = results[i];
-                    categories.push(r.category_id);
+                    let article = results[i];
                     items.push({
-                        id: r.id,
-                        title: r.title,
+                        id: article.id,
+                        title: article.title,
                         price: {
-                            currency: r.currency_id,
-                            amount: r.available_quantity,
-                            decimals: r.price
+                            currency: article.currency_id,
+                            amount: article.available_quantity,
+                            decimals: article.price
                         },
-                        picture: r.thumbnail,
-                        condition: r.condition,
-                        free_shipping: (r.shipping && r.shipping.free_shipping === true)
+                        picture: article.thumbnail,
+                        condition: article.condition,
+                        free_shipping: (article.shipping && article.shipping.free_shipping === true),
+                        location: {
+                            state: article.address.state_name,
+                            city: article.address.city_name
+                        }
                     });
                 }
             }
@@ -57,28 +70,33 @@ app.get("/items", catchUnhandledErrors((req, res) => {
 
 app.get("/items/:id", catchUnhandledErrors((req, res) => {
     return Promise.all([
-            fetch(`${process.env.API_ML_PRODUCT_INFO}/${req.params.id}`).then(response => response.json()),
-            fetch(`${process.env.API_ML_PRODUCT_INFO}/${req.params.id}/description`).then(response => response.json())
+            fetch(`${process.env.API_ML_PRODUCT_INFO}/items/${req.params.id}`).then(response => response.json()),
+            fetch(`${process.env.API_ML_PRODUCT_INFO}/items/${req.params.id}/description`).then(response => response.json())
         ])
-        .then(([ info, description ]) => {
-            let item;
-            if (info) {
-                item = {
-                    id: info.id,
-                    title: info.title,
-                    price: {
-                        currency: info.currency_id,
-                        amount: info.available_quantity,
-                        decimals: info.price
-                    },
-                    condition: info.condition,
-                    free_shipping: (info.shipping && info.shipping.free_shipping === true),
-                    sold_quantity: info.sold_quantity,
-                    description: description.plain_text
-                };
-            }
+        .then(([ article, description ]) => 
+            fetch(`${process.env.API_ML_PRODUCT_INFO}/categories/${article.category_id}`).then(response => response.json())
+                .then(category => [ article, description, category ])
+        )
+        .then(([ article, description, category ]) => {
+            let categories = (category.path_from_root || [])
+                .map(path => path.name);
+            let item = {
+                id: article.id,
+                title: article.title,
+                price: {
+                    currency: article.currency_id,
+                    amount: article.available_quantity,
+                    decimals: article.price
+                },
+                picture: article.pictures && article.pictures.length > 0 ? article.pictures[0].url : article.thumbnail,
+                condition: article.condition,
+                free_shipping: (article.shipping && article.shipping.free_shipping === true),
+                sold_quantity: article.sold_quantity,
+                description: description.plain_text
+            };
             res.send({
                 author,
+                categories,
                 item
             });
         });

@@ -47,6 +47,10 @@ export interface SearchItemsResponseBody {
         picture: string;
         condition: string;
         free_shipping: boolean;
+        location: {
+            state: string;
+            city: string;
+        };
     }[];
 }
 
@@ -55,6 +59,7 @@ export interface GetItemResponseBody {
         name: string;
         lastname: string;
     };
+    categories: string[];
     item: {
         id: string;
         title: string;

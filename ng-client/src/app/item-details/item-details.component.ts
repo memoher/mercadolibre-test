@@ -10,6 +10,8 @@ import { APIService, GetItemResponseBody } from '../api.service';
 })
 export class ItemDetailsComponent implements OnInit {
 
+    categories: string[];
+
     article: {
         id: string;
         title: string;
@@ -39,9 +41,14 @@ export class ItemDetailsComponent implements OnInit {
             .subscribe((id: string) => {
                 this.api.getItem(id)
                     .subscribe(data => {
+                        this.categories = data.categories;
                         this.article = data.item;
                     });
             });
+    }
+
+    buy() {
+        alert('Muy buena elección!');
     }
 
 }

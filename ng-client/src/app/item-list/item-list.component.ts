@@ -25,6 +25,10 @@ export class ItemListComponent implements OnInit {
         picture: string;
         condition: string;
         free_shipping: boolean;
+        location: {
+            state: string;
+            city: string;
+        };
     }[];
 
     constructor(

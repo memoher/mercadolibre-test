@@ -99,7 +99,6 @@ app-item-list {
             min-height: $thumbnailSize;
             max-height: $thumbnailSize;
             border-radius: 4px;
-            background-color: red;
             @media (min-width: 576px) {
                 float:  left !important;
                 margin: 0 $marginPaddingSize1 0 0;
@@ -107,7 +106,6 @@ app-item-list {
             @media (max-width: 575px) {
                 display: block;
                 margin: auto;
-                background-color: blue;
             }
         }
         .ml-item-price {
@@ -119,11 +117,11 @@ app-item-list {
             line-height: $fontSize5;
             color: $secondaryColor;
             font-size: $fontSize1;
-            white-space: nowrap;
         }
-        .ml-item-description {
+        .ml-item-title {
             font-size: $fontSize4;
             padding: $marginPaddingSize2 0 0 0;
+            white-space: pre-wrap;
         }
     }
 }
@@ -169,6 +167,7 @@ app-item-details {
         .ml-item-description {
             font-size: $fontSize4;
             padding: $marginPaddingSize2 0 0 0;
+            white-space: pre-wrap;
         }
     }
 }
