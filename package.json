@@ -1,0 +1,20 @@
+{
+  "name": "mercadolibre-test",
+  "version": "0.0.1",
+  "description": "Aplicación Angular de la prueba práctica para aspirantes al área de front-end de Mercado Libre. This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.3.6.",
+  "author": "Julian Hernández R. (julian_her@hotmail.com)",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/memoher/mercadolibre-test.git"
+  },
+  "homepage": "https://github.com/memoher/mercadolibre-test#readme",
+  "scripts": {
+    "prestart": "npm i && cd server && npm i && cd .. && cd ng-client && npm i",
+    "start": "concurrently -k -p \"[{name}]\" -n \"Server,Client\" -c \"cyan.bold,green.bold\" \"cd server && npm start\" \"cd ng-client && npm start\"",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "devDependencies": {
+    "concurrently": "^4.1.0"
+  }
+}

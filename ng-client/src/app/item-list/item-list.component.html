@@ -1,14 +1,14 @@
 <div class="ml-breadcrumb">
     Electrónica auido y video > Bla bla bla bla bla bla
 </div>
-<div class="ml-container">
-    <div class="ml-item-card clearfix">
-        <img class="ml-item-thumbnail" alt="Foto">
+<div *ngIf="articles" class="ml-container">
+    <div *ngFor="let article of articles" class="ml-item-card clearfix">
+        <img class="ml-item-thumbnail" [src]="article.picture" alt="Foto">
         <div class="row no-gutters">
             <div class="col">
                 <span class="ml-item-price">
-                    Valor
-                    <i class="ml-shipping-icon"></i>
+                    {{ article.price.currency }} {{ article.price.decimals | number }}
+                    <i [hidden]="!article.free_shipping" class="ml-shipping-icon"></i>
                 </span>
             </div>
             <div class="col-sm-4">
@@ -16,95 +16,9 @@
             </div>
         </div>
         <div class="ml-item-description">
-            BLa bla blaBLa bla blaBLa bla blaBLa bla blaBLa bla blaBLa bla blaBLa bla blaBLa bla blaBLa bla
-            blaBLa
-            bla blaBLa bla blaBLa bla blaBLa bla blaBLa bla blaBLa bla blaBLa bla blaBLa bla blaBLa bla blaBLa
-            bla
-            blaBLa
-        </div>
-    </div>
-    <div class="ml-item-card clearfix">
-        <img class="ml-item-thumbnail" alt="Foto">
-        <div class="row no-gutters">
-            <div class="col">
-                <span class="ml-item-price">
-                    Valor
-                    <i class="ml-shipping-icon"></i>
-                </span>
-            </div>
-            <div class="col-sm-4">
-                <span class="ml-item-location">Otro valor</span>
-            </div>
-        </div>
-        <div class="ml-item-description">
-            BLa bla blaBLa bla blaBLa bla blaBLa bla blaBLa bla blaBLa bla blaBLa bla blaBLa bla blaBLa bla
-            blaBLa
-            bla blaBLa bla blaBLa bla blaBLa bla blaBLa bla blaBLa bla blaBLa bla blaBLa bla blaBLa bla blaBLa
-            bla
-            blaBLa
-        </div>
-    </div>
-    <div class="ml-item-card clearfix">
-        <img class="ml-item-thumbnail" alt="Foto">
-        <div class="row no-gutters">
-            <div class="col">
-                <span class="ml-item-price">
-                    Valor
-                    <i class="ml-shipping-icon"></i>
-                </span>
-            </div>
-            <div class="col-sm-4">
-                <span class="ml-item-location">Otro valor</span>
-            </div>
-        </div>
-        <div class="ml-item-description">
-            BLa bla blaBLa bla blaBLa bla blaBLa bla blaBLa bla blaBLa bla blaBLa bla blaBLa bla blaBLa bla
-            blaBLa
-            bla blaBLa bla blaBLa bla blaBLa bla blaBLa bla blaBLa bla blaBLa bla blaBLa bla blaBLa bla blaBLa
-            bla
-            blaBLa
-        </div>
-    </div>
-    <div class="ml-item-card clearfix">
-        <img class="ml-item-thumbnail" alt="Foto">
-        <div class="row no-gutters">
-            <div class="col">
-                <span class="ml-item-price">
-                    Valor
-                    <i class="ml-shipping-icon"></i>
-                </span>
-            </div>
-            <div class="col-sm-4">
-                <span class="ml-item-location">Otro valor</span>
-            </div>
-        </div>
-        <div class="ml-item-description">
-            BLa bla blaBLa bla blaBLa bla blaBLa bla blaBLa bla blaBLa bla blaBLa bla blaBLa bla blaBLa bla
-            blaBLa
-            bla blaBLa bla blaBLa bla blaBLa bla blaBLa bla blaBLa bla blaBLa bla blaBLa bla blaBLa bla blaBLa
-            bla
-            blaBLa
-        </div>
-    </div>
-    <div class="ml-item-card clearfix">
-        <img class="ml-item-thumbnail" alt="Foto">
-        <div class="row no-gutters">
-            <div class="col">
-                <span class="ml-item-price">
-                    Valor
-                    <i class="ml-shipping-icon"></i>
-                </span>
-            </div>
-            <div class="col-sm-4">
-                <span class="ml-item-location">Otro valor</span>
-            </div>
-        </div>
-        <div class="ml-item-description">
-            BLa bla blaBLa bla blaBLa bla blaBLa bla blaBLa bla blaBLa bla blaBLa bla blaBLa bla blaBLa bla
-            blaBLa
-            bla blaBLa bla blaBLa bla blaBLa bla blaBLa bla blaBLa bla blaBLa bla blaBLa bla blaBLa bla blaBLa
-            bla
-            blaBLa
+            <a [routerLink]="['/items', article.id]"routerLinkActive="active">
+                {{ article.title }}
+            </a>
         </div>
     </div>
 </div>

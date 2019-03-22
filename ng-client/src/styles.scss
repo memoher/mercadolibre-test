@@ -136,10 +136,12 @@ app-item-details {
             width: $pictureSize;
             vertical-align: top;
             background-color: red;
-            @media(max-width: calc(#{$pictureSize} + #{$marginPaddingSize2} + #{$marginPaddingSize2} + 180px)) {
+            @media(max-width: calc(#{$pictureSize} + #{$marginPaddingSize2} + #{$marginPaddingSize2} + 330px)) {
                 display: block;
-                width: 100%;
                 margin: auto;
+            }
+            @media(max-width: calc(#{$pictureSize} + #{$marginPaddingSize2} + #{$marginPaddingSize2} + 180px)) {
+                width: 100%;
                 background-color: blue;
             }
         }
