@@ -6,13 +6,15 @@ Instrucciones para iniciar la aplicación en modo de desarrollo:
 ## API
 Ejecutar API en modo dev (http://localhost:3000):
 ```bash
+cd server
 npm i
-npm run server
+npm start
 ```
 
 ## APP
 Ejecutar APP en modo dev (http://localhost:4200):
 ```bash
+cd ng-client
 npm i
-npm run ng-client
+npm start
 ```
