@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { filter, map } from 'rxjs/operators';
 import { APIService, GetItemResponseBody } from '../api.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
     selector: 'app-item-details',
@@ -29,6 +30,7 @@ export class ItemDetailsComponent implements OnInit {
 
     constructor(
         private route: ActivatedRoute,
+        private router: Router,
         private api: APIService
     ) { }
 
@@ -43,6 +45,19 @@ export class ItemDetailsComponent implements OnInit {
                     .subscribe(data => {
                         this.categories = data.categories;
                         this.article = data.item;
+                    }, err => {
+                        let errHandled = false;
+                        if (err instanceof HttpErrorResponse) {
+                            const httpErr = err as HttpErrorResponse;
+                            if (httpErr.status === 404) {
+                                errHandled = true;
+                                this.router.navigate(['/']);
+                                alert(`Upps! El producto ${id} no existe`);
+                            }
+                        }
+                        if (!errHandled) {
+                            alert(err.message || err);
+                        }
                     });
             });
     }

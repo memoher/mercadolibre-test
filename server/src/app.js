@@ -69,43 +69,53 @@ app.get("/items", catchUnhandledErrors((req, res) => {
 }));
 
 app.get("/items/:id", catchUnhandledErrors((req, res) => {
-    return Promise.all([
-            fetch(`${process.env.API_ML_PRODUCT_INFO}/items/${req.params.id}`).then(response => response.json()),
-            fetch(`${process.env.API_ML_PRODUCT_INFO}/items/${req.params.id}/description`).then(response => response.json())
-        ])
-        .then(([ article, description ]) => 
-            fetch(`${process.env.API_ML_PRODUCT_INFO}/categories/${article.category_id}`).then(response => response.json())
-                .then(category => [ article, description, category ])
-        )
-        .then(([ article, description, category ]) => {
-            let categories = (category.path_from_root || [])
-                .map(path => path.name);
-            let item = {
-                id: article.id,
-                title: article.title,
-                price: {
-                    currency: article.currency_id,
-                    amount: article.available_quantity,
-                    decimals: article.price
-                },
-                picture: article.pictures && article.pictures.length > 0 ? article.pictures[0].url : article.thumbnail,
-                condition: article.condition,
-                free_shipping: (article.shipping && article.shipping.free_shipping === true),
-                sold_quantity: article.sold_quantity,
-                description: description.plain_text
-            };
-            res.send({
-                author,
-                categories,
-                item
-            });
+    return fetch(`${process.env.API_ML_PRODUCT_INFO}/items/${req.params.id}`)
+        .then(async response => {
+            if (response.status !== 200) {
+                return response.text()
+                    .then(body => {
+                        res.status(response.status).send(body);
+                    });
+            } else {
+                return response.json()
+                    .then(article => {
+                        return Promise.all([
+                            fetch(`${process.env.API_ML_PRODUCT_INFO}/categories/${article.category_id}`).then(response => response.json()),
+                            fetch(`${process.env.API_ML_PRODUCT_INFO}/items/${article.id}/description`).then(response => response.json())
+                        ])
+                        .then(([ category, description ]) => ([ article, category, description ]));
+                    })
+                    .then(([ article, category, description ]) => {
+                        let categories = (category.path_from_root || [])
+                            .map(path => path.name);
+                        let item = {
+                            id: article.id,
+                            title: article.title,
+                            price: {
+                                currency: article.currency_id,
+                                amount: article.available_quantity,
+                                decimals: article.price
+                            },
+                            picture: article.pictures && article.pictures.length > 0 ? article.pictures[0].url : article.thumbnail,
+                            condition: article.condition,
+                            free_shipping: (article.shipping && article.shipping.free_shipping === true),
+                            sold_quantity: article.sold_quantity,
+                            description: description.plain_text
+                        };
+                        res.send({
+                            author,
+                            categories,
+                            item
+                        });
+                    });
+            }
         });
 }));
 
 if (process.env.NODE_ENV === "production") {
     app.use((err, req, res, next) => {
-        res.status(500).send("Upps! Algo salió mal...");
         console.error(err);
+        res.status(500).send("Upps! Algo salió mal...");
     });
 } else {
     app.use(errorhandler());

@@ -48,6 +48,8 @@ export class ItemListComponent implements OnInit {
                     .subscribe(data => {
                         this.categories = data.categories;
                         this.articles = data.items;
+                    }, err => {
+                        alert(err.message || err);
                     });
             });
     }

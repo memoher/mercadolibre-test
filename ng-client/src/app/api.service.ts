@@ -25,8 +25,8 @@ export class APIService {
     }
 
     private handleError(res: HttpErrorResponse | any) {
-        console.error(res.error || res.body.error);
-        return observableThrowError(res.error || 'Server error');
+        console.error(res);
+        return observableThrowError(res || 'Server error');
     }
 }
 
