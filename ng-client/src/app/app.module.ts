@@ -12,6 +12,7 @@ import { ItemListComponent } from './item-list/item-list.component';
 import { ItemDetailsComponent } from './item-details/item-details.component';
 import { SearchBarComponent } from './search-bar/search-bar.component';
 import { APIService } from './api.service';
+import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
 
 @NgModule({
     declarations: [
@@ -19,7 +20,8 @@ import { APIService } from './api.service';
         HomeComponent,
         ItemListComponent,
         ItemDetailsComponent,
-        SearchBarComponent
+        SearchBarComponent,
+        BreadcrumbComponent
     ],
     imports: [
         CommonModule,

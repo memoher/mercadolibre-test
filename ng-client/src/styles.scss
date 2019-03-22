@@ -34,12 +34,6 @@ body {
     min-width: 300px;
 }
 
-.ml-breadcrumb {
-    color: $secondaryColor;
-    font-size: $fontSize2;
-    padding: $marginPaddingSize1 0;
-}
-
 .ml-container {
     background-color: $containerBackgroundColor;
     border-radius: 4px;
@@ -84,6 +78,15 @@ app-search-bar {
     };
     .ml-search-button {
         cursor: pointer;
+    }
+}
+
+app-breadcrumb {
+    margin: 0 0 $marginPaddingSize1 0;
+    .ml-breadcrumb {
+        color: $secondaryColor;
+        font-size: $fontSize2;
+        padding: $marginPaddingSize1 0 0 0; 
     }
 }
 
@@ -133,14 +136,12 @@ app-item-details {
             display: inline-block;
             width: $pictureSize;
             vertical-align: top;
-            background-color: red;
             @media(max-width: calc(#{$pictureSize} + #{$marginPaddingSize2} + #{$marginPaddingSize2} + 330px)) {
                 display: block;
                 margin: auto;
             }
             @media(max-width: calc(#{$pictureSize} + #{$marginPaddingSize2} + #{$marginPaddingSize2} + 180px)) {
                 width: 100%;
-                background-color: blue;
             }
         }
         .ml-item-summary {

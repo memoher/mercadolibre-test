@@ -1,16 +1,11 @@
-<div class="ml-breadcrumb">
-    <span *ngFor="let category of categories; last as isLast">
-        {{ category }}
-        <span *ngIf="!isLast">></span>
-    </span>
-</div>
+<app-breadcrumb [entries]="categories"></app-breadcrumb>
 <div *ngIf="article" class="ml-container">
     <div class="ml-item-card">
         <div>
-            <img class="ml-item-picture" [src]="article.picture" alt="Foto">
+            <img class="ml-item-picture pr-1" [src]="article.picture" alt="Foto">
             <div class="ml-item-summary">
                 <div class="ml-item-status">
-                    Nuevo - {{ article.sold_quantity }} vendidos
+                    {{ (article.condition === 'new' ? 'Nuevo' : 'Usado') }} - {{ article.sold_quantity }} vendidos
                 </div>
                 <div class="ml-item-name">
                     {{ article.title }}
