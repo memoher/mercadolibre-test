@@ -34,26 +34,6 @@ body {
     min-width: 300px;
 }
 
-app-search-bar {
-    .ml-logo {
-        background: url('/assets/images/Logo_ML.png') no-repeat;
-        width: 53px;
-        height: 36px;
-        display: inline-block;
-    }
-    .ml-input-search-bar {
-        font-size: $fontSize4;
-        /* Chrome, Safari, Opera and Edge */
-        &::-webkit-input-placeholder { color: $inputPlaceholderColor; }
-        /* Firefox 4 through 18 */
-        &:-moz-input-placeholder { color: $inputPlaceholderColor; }
-        /* Firefox 19+ */
-        &::-moz-input-placeholder { color: $inputPlaceholderColor; }
-        /* IE10 and IE11 */
-        &:-ms-input-placeholder { color: $inputPlaceholderColor; }
-    };
-}
-
 .ml-breadcrumb {
     color: $secondaryColor;
     font-size: $fontSize2;
@@ -64,6 +44,47 @@ app-search-bar {
     background-color: $containerBackgroundColor;
     border-radius: 4px;
     margin: 0 0 $marginPaddingSize2 0;
+}
+
+.ml-search-icon {
+    background: url('/assets/images/ic_Search.png') no-repeat;
+    width: 18px;
+    height: 18px;
+    display: inline-block;
+}
+
+.ml-shipping-icon {
+    background: url('/assets/images/ic_shipping.png') no-repeat;
+    width: 18px;
+    height: 18px;
+    display: inline-block;
+}
+
+.ml-btn-primary {
+    width: 100%;
+}
+
+app-search-bar {
+    a.ml-logo {
+        background: url('/assets/images/Logo_ML.png') no-repeat;
+        width: 53px;
+        height: 36px;
+        display: inline-block;
+    }
+    input.ml-search-input {
+        font-size: $fontSize4;
+        /* Chrome, Safari, Opera and Edge */
+        &::-webkit-input-placeholder { color: $inputPlaceholderColor; }
+        /* Firefox 4 through 18 */
+        &:-moz-input-placeholder { color: $inputPlaceholderColor; }
+        /* Firefox 19+ */
+        &::-moz-input-placeholder { color: $inputPlaceholderColor; }
+        /* IE10 and IE11 */
+        &:-ms-input-placeholder { color: $inputPlaceholderColor; }
+    };
+    .ml-search-button {
+        cursor: pointer;
+    }
 }
 
 app-item-list {
@@ -78,32 +99,27 @@ app-item-list {
             min-height: $thumbnailSize;
             max-height: $thumbnailSize;
             border-radius: 4px;
-            margin: 0 $marginPaddingSize1 0 0;
-        }
-        @media (min-width: 400px) {
-            .ml-item-thumbnail {
+            background-color: red;
+            @media (min-width: 576px) {
                 float:  left !important;
+                margin: 0 $marginPaddingSize1 0 0;
+            }
+            @media (max-width: 575px) {
+                display: block;
+                margin: auto;
+                background-color: blue;
             }
         }
         .ml-item-price {
             line-height: $fontSize5;
             font-size: $fontSize5;
-            font-weight: bold;
             white-space: nowrap;
-            min-width: 200px;
-            .ml-item-shipping {
-                background: url('/assets/images/ic_shipping.png') no-repeat;
-                width: 18px;
-                height: 18px;
-                display: inline-block;
-            }
         }
         .ml-item-location {
             line-height: $fontSize5;
             color: $secondaryColor;
             font-size: $fontSize1;
             white-space: nowrap;
-            min-width: 100px;
         }
         .ml-item-description {
             font-size: $fontSize4;
@@ -116,12 +132,37 @@ app-item-details {
     .ml-item-card {
         padding: $marginPaddingSize2;
         .ml-item-picture {
+            display: inline-block;
             width: $pictureSize;
-            min-width: $pictureSize;
-            max-width: $pictureSize;
-            height: $pictureSize;
-            min-height: $pictureSize;
-            max-height: $pictureSize;
+            vertical-align: top;
+            background-color: red;
+            @media(max-width: calc(#{$pictureSize} + #{$marginPaddingSize2} + #{$marginPaddingSize2} + 180px)) {
+                display: block;
+                width: 100%;
+                margin: auto;
+                background-color: blue;
+            }
+        }
+        .ml-item-summary {
+            display: inline-block;
+            width: calc(100% - #{$pictureSize});
+            @media(max-width: calc(#{$pictureSize} + #{$marginPaddingSize2} + #{$marginPaddingSize2} + 330px)) {
+                display: block;
+                width: 100%;
+            }
+        }
+        .ml-item-status {
+            font-size: $fontSize2;
+            padding: 0 0 $marginPaddingSize1 0;
+        }
+        .ml-item-name {
+            font-size: $fontSize5;
+            font-weight: bold;
+            padding: 0 0 $marginPaddingSize2 0;
+        }
+        .ml-item-price {
+            font-size: $fontSize8;
+            padding: 0 0 $marginPaddingSize2 0;
         }
         .ml-item-description {
             font-size: $fontSize4;
