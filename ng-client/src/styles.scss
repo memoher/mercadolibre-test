@@ -86,7 +86,10 @@ app-breadcrumb {
     .ml-breadcrumb {
         color: $secondaryColor;
         font-size: $fontSize2;
-        padding: $marginPaddingSize1 0 0 0; 
+        padding: $marginPaddingSize1 0 0 0;
+        a {
+            color: inherit;
+        }
     }
 }
 
@@ -125,6 +128,9 @@ app-item-list {
             font-size: $fontSize4;
             padding: $marginPaddingSize2 0 0 0;
             white-space: pre-wrap;
+            a {
+                color: inherit;
+            }
         }
     }
 }
@@ -166,7 +172,12 @@ app-item-details {
             padding: 0 0 $marginPaddingSize2 0;
         }
         .ml-item-description {
-            font-size: $fontSize4;
+            .ml-title {
+                font-size: $fontSize7;
+                font-weight: bold;
+                padding: 0 0 $marginPaddingSize2 0;
+            }
+            font-size: $fontSize3;
             padding: $marginPaddingSize2 0 0 0;
             white-space: pre-wrap;
         }

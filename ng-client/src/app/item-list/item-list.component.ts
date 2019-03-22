@@ -49,7 +49,7 @@ export class ItemListComponent implements OnInit {
                         this.categories = data.categories;
                         this.articles = data.items;
                     }, err => {
-                        alert(err.message || err);
+                        alert('Upps! Estamos con dificultades técnicas. Por favor intenta más tarde');
                     });
             });
     }

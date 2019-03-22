@@ -56,7 +56,7 @@ export class ItemDetailsComponent implements OnInit {
                             }
                         }
                         if (!errHandled) {
-                            alert(err.message || err);
+                            alert('Upps! Estamos con dificultades técnicas. Por favor intenta más tarde');
                         }
                     });
             });

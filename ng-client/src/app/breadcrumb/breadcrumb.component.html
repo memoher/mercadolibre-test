@@ -1,6 +1,6 @@
 <div *ngIf="entries" class="ml-breadcrumb">
     <span *ngFor="let entry of entries; last as isLast">
-        {{ entry }}
-        <span *ngIf="!isLast">></span>
+        <a [routerLink]="['/items']" [queryParams]="{ search: entry }" routerLinkActive="active">{{ entry }}</a>
+        <span class="mx-1" *ngIf="!isLast">></span>
     </span>
 </div>

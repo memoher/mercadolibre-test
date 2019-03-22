@@ -1,7 +1,9 @@
 <app-breadcrumb [entries]="categories"></app-breadcrumb>
 <div *ngIf="articles" class="ml-container">
     <div *ngFor="let article of articles" class="ml-item-card clearfix">
-        <img class="ml-item-thumbnail" [src]="article.picture" alt="Foto">
+        <a [routerLink]="['/items', article.id]" routerLinkActive="active">
+            <img class="ml-item-thumbnail" [src]="article.picture" alt="Foto">
+        </a>
         <div class="row no-gutters">
             <div class="col">
                 <span class="ml-item-price">
